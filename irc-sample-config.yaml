@@ -1,3 +1,5 @@
-irc:
+twitch-irc:
   username: "justinfan123"
   password: "bruh"
+  join-channel:
+    - twitch
