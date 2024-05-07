@@ -6,6 +6,12 @@ import (
 	irc "irc"
 )
 
+type TwitchIrcConfig struct {
+	Username    string   `yaml:"username"`
+	Password    string   `yaml:"password"`
+	ChannelList []string `yaml:"join-channels"`
+}
+
 func main() {
 
 	sampleCallback := func(ircc *irc.IrcClient, msg string) error {
@@ -31,8 +37,8 @@ func main() {
 	// Send test.
 
 	ircc.SendCapabilityRequest(irc.CapabilityTags)
-	ircc.SendRawMessage("JOIN #alveussanctuary")
-	ircc.SendRawMessage("PING tmi.twitch.tv")
+	ircc.SendMessage(irc.JOIN("#twitch"))
+	ircc.SendMessage(irc.PING("tmi.twitch.tv"))
 
 	<-client_status // Wait for client to exit.
 	fmt.Println("Client exited")
